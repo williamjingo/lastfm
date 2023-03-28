@@ -9,3 +9,8 @@ A web application that allows users to search and view information about music a
 * User interface
 
 User authentication using laravel [Jetstream](https://jetstream.laravel.com) and [socialstream](https://docs.socialstream.dev/) to support Google OAuth.
+
+
+```
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+```

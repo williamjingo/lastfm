@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MusicController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,7 +30,30 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+
+    Route::get('/dashboard', [MusicController::class, 'index'])->name('dashboard');
 });
+
+/**
+ * Integrate lastfm api
+ *
+ * MusicController
+ * MusicRepository -> call Music -> contract ->
+ * MusicProvider
+ *
+ * Service to query the last fm api
+ * --------------------------------
+ * Last FM Service
+ *
+ * favourite models
+ * ----------------
+ * Album Model
+ * Artist Model
+ *
+ * Response collection
+ * -------------------
+ * AlbumResource
+ * ArtistResource
+ *
+ */
+
