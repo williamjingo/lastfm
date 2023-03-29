@@ -30,7 +30,7 @@ class LastFmApiGateway implements MusicContract
             'format' => 'json',
             'api_key' => env('LAST_FM_API_KEY'),
             'page' => $this->page(),
-            'limit'=> 15
+            'limit'=> 5
         ];
 
         $this->api_endpoint = env('LAST_FM_API_PATH');
@@ -45,7 +45,6 @@ class LastFmApiGateway implements MusicContract
         try {
             // fetch data
             $response = $this->client->get($this->api_endpoint, ['query' => $this->query]);
-
             // check status code
             $data = json_decode((string) $response->getBody(), true);
 
@@ -88,6 +87,9 @@ class LastFmApiGateway implements MusicContract
     {
         if (request()->has('page') && is_numeric(request()->get('page'))) {
             $currentPage = (int)request()->get('page');
+
+            // restricting page size from exceeding 10000 to prevent `page param out of bounds (1-10000)` from last.fm API
+            if ($currentPage > 10000) $currentPage = 10000;
         }
 
         return $currentPage;
@@ -112,7 +114,7 @@ class LastFmApiGateway implements MusicContract
         $perPage = $data['results']['opensearch:itemsPerPage'];
         $query = $data['results']['opensearch:Query'];
         $resultsCount = $data['results']['opensearch:totalResults'];
-        $page = $query['startPage'] || 1;
+        $page = $query['startPage'];
 
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
 

@@ -30,7 +30,8 @@ class ArtistController extends Model
 
         return  Inertia::render('Artist',
             [
-                'query_data' => MusicArtistResource::collection($this->musicRepository->get_all_artists($queryParam))
+                'search_results' => MusicArtistResource::collection($this->musicRepository->get_all_artists($queryParam)),
+                'filters' => request()->only(['page', 'query']),
             ]);
     }
 }

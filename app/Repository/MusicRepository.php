@@ -26,6 +26,9 @@ class MusicRepository
      */
     public function get_all_albums(array $query): LengthAwarePaginator
     {
+
+        http://ws.audioscrobbler.com/2.0/?method=album.search&album=50cent&api_key=ecd81801d404e8722901781a74f59ed9&format=json
+
         return $this->musicContract->search(LastFmApiGateway::$albumSearchMethod, [ 'album' =>  $query['query']]);
     }
 
