@@ -4,7 +4,6 @@
 namespace App\Gateways\Music;
 
 
-use Illuminate\Http\Client\Request;
 
 interface MusicContract
 {

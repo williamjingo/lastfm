@@ -34,26 +34,3 @@ Route::middleware([
     Route::get('/dashboard', [MusicController::class, 'index'])->name('dashboard');
 });
 
-/**
- * Integrate lastfm api
- *
- * MusicController
- * MusicRepository -> call Music -> contract ->
- * MusicProvider
- *
- * Service to query the last fm api
- * --------------------------------
- * Last FM Service
- *
- * favourite models
- * ----------------
- * Album Model
- * Artist Model
- *
- * Response collection
- * -------------------
- * AlbumResource
- * ArtistResource
- *
- */
-

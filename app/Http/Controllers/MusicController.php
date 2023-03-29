@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\GetMusicRequest;
+use App\Http\Resources\MusicAlbumResource;
 use App\Repository\MusicRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -28,8 +28,8 @@ class MusicController extends Controller
 
         return  Inertia::render('Dashboard',
         [
-            'albums' => $this->musicRepository->get_all_albums($queryParam),
-            'artists' => $this->musicRepository->get_all_artists($queryParam)
+            'albums' => MusicAlbumResource::collection($this->musicRepository->get_all_albums($queryParam)),
+//            'artists' => $this->musicRepository->get_all_artists($queryParam)
         ]);
     }
 }
