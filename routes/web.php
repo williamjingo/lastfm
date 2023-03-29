@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MusicController;
+use App\Models\ArtistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,5 +33,26 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', [MusicController::class, 'index'])->name('dashboard');
+    Route::resource('artists', ArtistController::class, [
+        'names' => [
+            'index' => 'artists',
+        ]
+    ]);
 });
+
+/**
+ * Integrate lastfm api
+ * search ui render
+ *
+ * favourite models
+ * ----------------
+ * Album Model
+ * Artist Model
+ *
+ * Response collection
+ * -------------------
+ * AlbumResource
+ * ArtistResource
+ *
+ */
 
