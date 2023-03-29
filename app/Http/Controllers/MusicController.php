@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\MusicAlbumResource;
+use App\Http\Resources\MusicArtistResource;
 use App\Repository\MusicRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,15 +22,12 @@ class MusicController extends Controller
     {
         $queryParam = $request->validate(['query' => 'regex:/^[a-zA-Z0-9\s]+$/|min:3|max:255']);
 
-        if(!$queryParam) return Inertia::render('Dashboard', [
-            'albums' => [],
-            'artists' => [],
-        ]);
+        if(!$queryParam) return Inertia::render('Dashboard');
 
         return  Inertia::render('Dashboard',
         [
             'albums' => MusicAlbumResource::collection($this->musicRepository->get_all_albums($queryParam)),
-//            'artists' => $this->musicRepository->get_all_artists($queryParam)
+            'artists' => MusicArtistResource::collection($this->musicRepository->get_all_artists($queryParam))
         ]);
     }
 }
