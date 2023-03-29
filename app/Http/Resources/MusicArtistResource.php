@@ -14,6 +14,15 @@ class MusicArtistResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        $medium_image = $this['image'][1];
+
+        return [
+            'name' => $this['name'],
+            'listners' => $this['listeners'],
+            'image' => $medium_image['#text'],
+            'mbid' => $this['mbid'],
+            'streamable' => $this['streamable'],
+            'url' => $this['url'],
+        ];
     }
 }

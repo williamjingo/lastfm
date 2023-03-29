@@ -22,6 +22,8 @@ class MusicAlbumResource extends JsonResource
             'artist' => $this['artist'],
             'image' => $medium_image['#text'],
             'url' => $this['url'],
+            'streamable' => $this['streamable'],
+            'mbid' => $this['mbid'],
         ];
     }
 }
