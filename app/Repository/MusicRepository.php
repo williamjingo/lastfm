@@ -26,7 +26,6 @@ class MusicRepository
      */
     public function get_all_albums(array $query): LengthAwarePaginator
     {
-
         return $this->musicContract->search(LastFmApiGateway::$albumSearchMethod, [ 'album' =>  $query['query']]);
     }
 

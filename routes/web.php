@@ -37,7 +37,7 @@ Route::middleware([
         'names' => [
             'index' => 'artists.index',
             'store' => 'artists.store',
-            'delete' => 'artists.destroy'
+            'destroy' => 'artists.destroy'
         ]
     ]);
 

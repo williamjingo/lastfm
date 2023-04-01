@@ -14,6 +14,7 @@ class Artist extends Model
         'listners',
         'image',
         'mbid',
-        'streamable'
+        'streamable',
+        'url'
     ];
 }

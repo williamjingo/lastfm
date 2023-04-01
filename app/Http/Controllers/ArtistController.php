@@ -5,18 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostArtistRequest;
 use App\Http\Resources\ArtistResource;
 use App\Http\Resources\MusicArtistResource;
+
+use App\Models\Artist;
 use App\Repository\ArtistRepository;
 use App\Repository\MusicRepository;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ArtistController extends Model
+class ArtistController extends Controller
 {
-    use HasFactory;
 
     private MusicRepository $musicRepository;
     private ArtistRepository $artistRepository;
@@ -49,11 +48,19 @@ class ArtistController extends Model
 
     public function store(PostArtistRequest $request): RedirectResponse
     {
-
         $this->artistRepository->store(
             $request->validated()
         );
 
+        return to_route('artists.index');
+    }
+
+    public function destroy(Artist $artist)
+    {
+        // delete artist
+        $this->artistRepository->destroy($artist);
+
+        // redirect to home
         return to_route('artists.index');
     }
 }
