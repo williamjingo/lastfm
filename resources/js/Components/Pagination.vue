@@ -14,9 +14,9 @@ defineProps({links: Array})
                     <Component
                         :is="link.url ? 'Link': 'span'"
                         :href="link.url"
-                        class="relative block rounded bg-transparent py-1.5 px-3 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                        class="relative block rounded py-1.5 px-3 text-sm text-neutral-600 transition-all duration-300 hover:bg-purple-400 hover:text-white dark:hover:text-white dark:text-white"
                         v-html="link.label"
-                        :class="{ 'pointer-events-none relative block rounded bg-transparent py-1.5 px-3 text-sm text-neutral-500 transition-all duration-300 dark:text-neutral-400': ! link.url, 'dark:hover:text-white bg-indigo-400': link.active }"
+                        :class="{ 'pointer-events-none relative text-neutral-500': ! link.url, 'bg-purple-400 text-white': link.active }"
                     />
                 </li>
             </ul>

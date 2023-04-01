@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\MusicController;
-use App\Models\ArtistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,26 +33,13 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', [MusicController::class, 'index'])->name('dashboard');
-    Route::resource('artists', ArtistController::class, [
+    Route::resource('artists', ArtistController::class)->names([
         'names' => [
-            'index' => 'artists',
+            'index' => 'artists.index',
+            'store' => 'artists.store',
+            'delete' => 'artists.destroy'
         ]
     ]);
-});
 
-/**
- * Integrate lastfm api
- * search ui render
- *
- * favourite models
- * ----------------
- * Album Model
- * Artist Model
- *
- * Response collection
- * -------------------
- * AlbumResource
- * ArtistResource
- *
- */
+});
 
