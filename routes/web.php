@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
-use App\Http\Controllers\MusicController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,8 +31,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-
-    Route::get('/dashboard', [MusicController::class, 'index'])->name('dashboard');
     Route::resource('artists', ArtistController::class)->names([
         'names' => [
             'index' => 'artists.index',
