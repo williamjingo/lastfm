@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Str;
 
 class MusicAlbumResource extends JsonResource
 {
@@ -14,15 +15,14 @@ class MusicAlbumResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $medium_image = $this['image'][1];
+        $medium_image = $this['image'][0];
 
         return [
-            'id' => $this['mbid'],
+            'id' => (string) Str::uuid(), // used just because no unique ids are returned from the Last.fm api
             'name' => $this['name'],
             'artist' => $this['artist'],
             'image' => $medium_image['#text'],
             'url' => $this['url'],
-            'streamable' => $this['streamable'],
             'mbid' => $this['mbid'],
         ];
     }

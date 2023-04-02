@@ -7,8 +7,6 @@ namespace App\Repository;
 use App\Gateways\Music\LastFmApiGateway;
 use App\Gateways\Music\MusicContract;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
 
 class MusicRepository
 {
