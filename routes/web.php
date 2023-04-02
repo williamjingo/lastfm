@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\MusicController;
 use Illuminate\Foundation\Application;
@@ -38,6 +39,14 @@ Route::middleware([
             'index' => 'artists.index',
             'store' => 'artists.store',
             'destroy' => 'artists.destroy'
+        ]
+    ]);
+
+    Route::resource('albums', AlbumController::class)->names([
+        'names' => [
+            'index' => 'albums.index',
+            'store' => 'albums.store',
+            'destroy' => 'albums.destroy'
         ]
     ]);
 
