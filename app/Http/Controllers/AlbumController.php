@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAlbumRequest;
 use App\Http\Requests\UpdateAlbumRequest;
+use App\Http\Resources\AlbumResource;
 use App\Http\Resources\MusicAlbumResource;
 use App\Http\Resources\MusicArtistResource;
 use App\Models\Album;
+use App\Repository\AlbumRepository;
 use App\Repository\MusicRepository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,10 +18,12 @@ use Inertia\Response;
 class AlbumController extends Controller
 {
     private MusicRepository $musicRepository;
+    private AlbumRepository $albumRepository;
 
-    public function __construct(MusicRepository $musicRepository)
+    public function __construct(MusicRepository $musicRepository, AlbumRepository $albumRepository)
     {
         $this->musicRepository = $musicRepository;
+        $this->albumRepository = $albumRepository;
     }
 
     /**
@@ -29,7 +34,7 @@ class AlbumController extends Controller
         $queryParam = $request->validate(['query' => 'regex:/^[a-zA-Z0-9\s]+$/|min:3|max:255']);
 
         $props = [
-//            'artists' => ArtistResource::collection($this->artistRepository->get_auth_user_favourite_artists()),
+            'albums' => AlbumResource::collection($this->albumRepository->get_auth_user_favourite_albums()),
         ];
 
         if($queryParam) {
@@ -40,55 +45,24 @@ class AlbumController extends Controller
             ];
         }
 
-
         return Inertia::render('Album', $props);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreAlbumRequest $request): RedirectResponse
     {
-        //
+        $this->albumRepository->store(
+            $request->validated()
+        );
+
+        return to_route('albums.index');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAlbumRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Album $album)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Album $album)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAlbumRequest $request, Album $album)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Album $album)
     {
-        //
+        // delete artist
+        $this->albumRepository->destroy($album);
+
+        // redirect to home
+        return to_route('albums.index');
     }
 }

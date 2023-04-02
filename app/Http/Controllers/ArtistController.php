@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostArtistRequest;
+use App\Http\Requests\StoreArtistRequest;
 use App\Http\Resources\ArtistResource;
 use App\Http\Resources\MusicArtistResource;
 
@@ -46,7 +46,7 @@ class ArtistController extends Controller
         return  Inertia::render('Artist', $props);
     }
 
-    public function store(PostArtistRequest $request): RedirectResponse
+    public function store(StoreArtistRequest $request): RedirectResponse
     {
         $this->artistRepository->store(
             $request->validated()
