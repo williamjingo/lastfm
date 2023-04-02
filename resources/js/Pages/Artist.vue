@@ -9,6 +9,7 @@ import ArtistTable from "@/Components/Artist/ArtistTable.vue";
 import {ref, watch} from "vue";
 import {router, useForm} from "@inertiajs/vue3";
 import debounce from 'lodash/debounce';
+import {open_new_tab} from "../utils";
 
 
 let props = defineProps({search_results: Object, artists: Object, filters: {type: Object, default: {query: ""}}})
@@ -33,8 +34,6 @@ watch(search, debounce((value) => {
     })
 }, 500))
 
-const linkAction = href => window.open(href, '_blank', 'noreferrer')
-
 const artistValidateTransform = artist => {
     const asArray = Object.entries(artist);
     const filtered = asArray.filter(([key, value]) => value && key !== "id")
@@ -57,7 +56,7 @@ const removeFavourite = ({id}) => form.delete(route('artists.destroy', id));
 
 const handleUserEvent = ({action, data}) => {
     // open new tab
-    if(action === "open-new-tab") return linkAction(data.url)
+    if(action === "open-new-tab") return open_new_tab(data.url)
 
     // remove from favourites
     if(action === "remove-artist") return removeFavourite(data)

@@ -11,7 +11,7 @@ class StoreAlbumRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class StoreAlbumRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|unique:albums,name|min:3|max:255',
+            'artist' => 'required|string|max:255',
+            'image' => 'url|max:255',
+            'url' => 'url|max:255',
+            'mbid' => 'string|max:255',
+        ];
+    }
+
+    /**
+     * Adding custom rule message
+     * @return string[]
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Album has already been added to your Favourites'
         ];
     }
 }
