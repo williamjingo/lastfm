@@ -2,8 +2,6 @@
 
 A Laravel application that allows users to search and view information about music artists and their albums.
 
-
-
 ### Features
 
 -   User authentication with laravel [Jetstream](https://jetstream.laravel.com) and [socialstream](https://docs.socialstream.dev/) to support Google OAuth.
@@ -11,8 +9,7 @@ A Laravel application that allows users to search and view information about mus
 -   Album search
 -   Favourite artists and albums
 
-
-### Setup 
+### Setup
 
 Make sure docker engine is running on your machine.
 
@@ -38,12 +35,14 @@ docker run --rm \
 ```
 
 Create the .env file using the command below
+
 ```
 cp .env.example .env
 ```
-Update ```.env``` with Google credentials ```GOOGLE_CLIENT_ID``` and ```GOOGLE_CLIENT_SECRET```. The credentials can be gotten from the [Google Developers Console](https://console.cloud.google.com/) 
 
-Update ```.env``` with the Last.fm API key ```LAST_FM_API_KEY``` from [last.fm](https://www.last.fm/api)
+Update `.env` with Google credentials `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`. The credentials can be gotten from the [Google Developers Console](https://console.cloud.google.com/)
+
+Update `.env` with the Last.fm API key `LAST_FM_API_KEY` from [last.fm](https://www.last.fm/api)
 
 Run project using
 
@@ -58,31 +57,22 @@ alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 ```
 
 Generate application key using
+
 ```
 sail artisan key:generate
 ```
 
 Run database migrations using
+
 ```
 sail artisan migrate
 ```
-
 
 Run the command below to stop the application docker containers
 
 ```
 sail down
 ```
-
-
-SCOUT_DRIVER=meilisearch
-MEILISEARCH_HOST=http://meilisearch:7700
-
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-
-LAST_FM_API_PATH=
-LAST_FM_API_KEY=
 
 ### Author
 
