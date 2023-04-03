@@ -74,6 +74,16 @@ Run the command below to stop the application docker containers
 sail down
 ```
 
+
+SCOUT_DRIVER=meilisearch
+MEILISEARCH_HOST=http://meilisearch:7700
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+LAST_FM_API_PATH=
+LAST_FM_API_KEY=
+
 ### Author
 
 <a href="https://www.linkedin.com/in/william-jingo/" target="_blank">George Jingo</a>
