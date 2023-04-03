@@ -68,6 +68,18 @@ Run database migrations using
 sail artisan migrate
 ```
 
+Install node dependencies
+
+```
+sail npm install
+sail npm run dev
+```
+
+Create a build using
+```
+sail npm run build
+```
+
 Run the command below to stop the application docker containers
 
 ```
